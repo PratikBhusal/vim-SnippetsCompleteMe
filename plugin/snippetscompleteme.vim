@@ -14,7 +14,7 @@ endif
 
 " Make it work like omni and user-defined completion {{{ -----------------------
 if g:scm_default_map
-    inoremap <silent> <C-x><C-s> <C-r>=snippetscompleteme#main()<CR>
+    inoremap <silent> <C-x><C-s> <C-R>=(snippetscompleteme#main() == 0 ? '' : UltiSnips#ExpandSnippet())<CR>
 endif
 
 if g:scm_move_with_ctrl_s

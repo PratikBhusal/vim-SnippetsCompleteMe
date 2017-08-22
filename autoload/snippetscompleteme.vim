@@ -40,8 +40,8 @@ function! snippetscompleteme#main()
     let l:start = l:start + 1
 
     " Initilize snippet container
-    " TODO: Add support for more snippet plugins? <17-08-20>
     let l:options = []
+    " TODO: Add support for more snippet plugins? <17-08-20>
     if !exists(':UltiSnipsEdit')
         echohl ErrorMsg | echom "Snippets plugin not found" | echohl None
         return ''
@@ -49,9 +49,14 @@ function! snippetscompleteme#main()
         let l:options = snippetscompleteme#get_ultisnips_list()
     endif
 
-    " TODO: If an evantually created option is enabled, let <cr> close menu and
+    " If there is only one avaliable snippet, automatically expand it
+    if len(l:options) == 1
+        return 1
+    endif
+
+    " TODO: If possible, implement a feature that lets <cr> close the menu and
     " expand the snippet <17-08-20>
     call complete(l:start, l:options)
 
-    return ''
+    return 0
 endfunction
