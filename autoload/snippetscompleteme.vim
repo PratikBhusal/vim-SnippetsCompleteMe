@@ -12,10 +12,11 @@ function! snippetscompleteme#main()
 
     " Initilize snippet container
     let l:options = []
-    " TODO: Add support for more snippet plugins? <17-08-20>
+    " TODO: Add support for more snippet plugins and learn how to extract
+    " snippets? <17-08-20>
     if !exists(':UltiSnipsEdit')
         echohl ErrorMsg | echom "Snippets plugin not found" | echohl None
-        return ''
+        return -1
     else
         let l:options = snippetscompleteme#ultisnips#get_list()
     endif
@@ -26,9 +27,11 @@ function! snippetscompleteme#main()
     endif
 
     " TODO: If possible, implement a feature that lets <cr> close the menu and
-    " expand the snippet <17-08-20>
+    " expand the snippet. Will have to check for plugin compatibiliy <17-08-20>
     call complete(l:start, l:options)
     let b:scm_on = 1
 
     return 0
 endfunction
+
+" vim: set expandtab softtabstop=4 shiftwidth=4 foldmethod=marker:
