@@ -1,33 +1,3 @@
-function! snippetscompleteme#get_ultisnips_list(...)
-    " Initilize List. Add previous entries if a parameter was included
-    if !exists('a:1')
-        let l:list = []
-    else
-        let l:list = a:1
-    endif
-
-    " Check for any avaliable snippets
-    let l:snippets = UltiSnips#SnippetsInCurrentScope()
-    if empty(l:snippets)
-        return l:list
-    endif
-
-    " Add the snippet to the completion menu
-    for l:snip in keys(l:snippets)
-        let l:description = get(l:snippets, l:snip)
-        call add(l:list, {
-            \ 'word' : l:snip,
-            \ 'menu' : '[US] ' . l:description,
-        \ })
-    endfor
-
-    " Sort and call the completion menu
-    if g:scm_sort_snippet_list
-        let l:list = sort(l:list)
-    endif
-
-    return l:list
-endfunction
 
 function! snippetscompleteme#main()
     " Locate the start of the word
@@ -46,7 +16,7 @@ function! snippetscompleteme#main()
         echohl ErrorMsg | echom "Snippets plugin not found" | echohl None
         return ''
     else
-        let l:options = snippetscompleteme#get_ultisnips_list()
+        let l:options = snippetscompleteme#ultisnips#get_list()
     endif
 
     " If there is only one avaliable snippet, automatically expand it
