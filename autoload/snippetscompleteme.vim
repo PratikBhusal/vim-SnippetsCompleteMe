@@ -1,3 +1,4 @@
+autocmd CompleteDone * let b:scm_on = 0
 
 function! snippetscompleteme#main()
     " Locate the start of the word
@@ -27,6 +28,7 @@ function! snippetscompleteme#main()
     " TODO: If possible, implement a feature that lets <cr> close the menu and
     " expand the snippet <17-08-20>
     call complete(l:start, l:options)
+    let b:scm_on = 1
 
     return 0
 endfunction
